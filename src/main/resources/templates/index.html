@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome on HOME page</h1>
+
+<button class="btn btn-primary" sec:authorize="isAuthenticated()" type="button">
+    <a th:href="@{/logout}">Logout</a>
+</button>
+
+</body>
+</html>

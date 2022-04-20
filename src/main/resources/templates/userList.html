@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Users</h1>
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>User name</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.role}"></td>
+                <td>
+                    <a th:unless="${#authentication.name} == ${user.username}"
+                       th:href="@{/users/{username}(username=${user.username})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/showFormForUpdate/{username}(username=${user.username})}" class="btn btn-primary">Update</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

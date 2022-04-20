@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/all.min.css}" rel="stylesheet">
+    <script th:href="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-body p-5 p-sm-5">
+                    <h3 class="card-title text-center mb-5 fw-light fs-4">Update</h3>
+                    <form th:action="@{/saveUpdatedUser}" method="post" th:object="${user}">
+                        <div class="form-floating mb-3">
+                            <input th:field="*{username}" class="form-control" id="username" placeholder="Username"
+                                   required autofocus="autofocus" readonly>
+                            <label for="username">Username</label>
+                        </div>
+                        <hr>
+                        <div class="form-floating mb-3">
+                            <input th:field="*{password}" type="password" class="form-control" id="password"
+                                   placeholder="Password" required>
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input th:field="*{role}" type="text" class="form-control" id="role" placeholder="Supported: ROLE_USER, ROLE_ADMIN"
+                                   required>
+                            <label for="role">Role</label>
+                        </div>
+                        <div class="d-grid mb-2">
+                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" th:type="submit">
+                                Update User
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
