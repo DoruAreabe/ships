@@ -14,19 +14,29 @@
             <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
                 <div class="card-body p-5 p-sm-5">
                     <h3 class="card-title text-center mb-5 fw-light fs-4">Register</h3>
-                    <form th:action="@{/registration}" method="post" th:object="${userRegistrationDto}">
+                    <form th:action="@{/registration}" method="post" th:object="${userDto}">
 
                         <div class="form-floating mb-3">
-                            <input th:field="*{username}" class="form-control" id="username" placeholder="myusername"
+                            <input th:field="*{firstName}" class="form-control" id="firstName" placeholder="firstName"
                                    required autofocus="autofocus">
-                            <label for="username">Username</label>
+                            <label for="firstName">FirstName</label>
                         </div>
 
-                        <hr>
+                        <div class="form-floating mb-3">
+                            <input th:field="*{lastName}" class="form-control" id="lastName" placeholder="lastName"
+                                   required autofocus="autofocus">
+                            <label for="lastName">lastName</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input th:field="*{emailId}" class="form-control" id="emailId" placeholder="emailId"
+                                   required autofocus="autofocus">
+                            <label for="emailId">EmailId</label>
+                        </div>
 
                         <div class="form-floating mb-3">
                             <input th:field="*{password}" type="password" class="form-control" id="password"
-                                   placeholder="Password" required>
+                            placeholder="Password" required>
                             <label for="password">Password</label>
                         </div>
 

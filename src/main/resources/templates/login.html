@@ -19,6 +19,8 @@
 
                         <div class="alert alert-info" role="alert" th:text="${success}" th:if="${success}">
                         </div>
+                        <div class="alert alert-info" role="alert" th:text="${error}" th:if="${error}">
+                        </div>
 
                         <div th:if="${param.logout}">
                             <div class="alert alert-info">
@@ -27,8 +29,8 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="name">
-                            <label for="username">User Name</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Email">
+                            <label for="username">Email</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" name="password" id="password"

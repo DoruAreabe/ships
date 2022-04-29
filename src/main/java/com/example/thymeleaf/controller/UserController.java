@@ -1,47 +1,50 @@
 package com.example.thymeleaf.controller;
 
+import com.example.thymeleaf.mappers.UserMapper;
 import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.dto.UserDto;
 import com.example.thymeleaf.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    final UserService userService;
 
-    @GetMapping("/users")
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping()
     public String allUsers(Model model) {
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users", users);
+        List<UserDto> userDtos = UserMapper.mapAllUser(userService.getAllUsers());
+        model.addAttribute("userDtos", userDtos);
         return "userList";
     }
 
-    @GetMapping(value = "/users/{username}")
-    public String deleteUserByUsername(@PathVariable String username) {
-        userService.deleteUserByUsername(username);
+    @GetMapping(value = "/{emailid}")
+    public String deleteUserByUsername(@PathVariable String emailid) {
+        userService.deleteUserByEmailId(emailid);
         return "redirect:/users";
     }
 
-    @GetMapping("/showFormForUpdate/{username}")
-    public String showFormForUpdate(@PathVariable String username, Model model) {
-        User user = userService.getUserByUsername(username);
-        //set user as a model attribute to pre-populate the form
-        model.addAttribute("user", user);
+    @GetMapping("/showFormForUpdate/{emailid}")
+    public String showFormForUpdate(@PathVariable String emailid, Model model) {
+        User user = userService.findUserByEmailIdIgnoreCase(emailid);
+        UserDto userDto = UserMapper.toUserDto(user);
+
+        model.addAttribute("user", userDto);
         return "updateForm";
     }
 
     @PostMapping("/saveUpdatedUser")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+    public String updateUser(@ModelAttribute("user") UserDto userDto) {
+        userService.saveUser(UserMapper.toEntity(userDto));
         return "redirect:/users";
     }
 }

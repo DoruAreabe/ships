@@ -1,34 +1,79 @@
 package com.example.thymeleaf.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.example.thymeleaf.model.roles.Role;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    private String username;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private long userid;
+
+    private String emailId;
 
     private String password;
-    private String role;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    private boolean isEnabled;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "userid"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> role = new HashSet<>();
 
     public User() {
     }
 
-    public User(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+    public long getUserid() {
+        return userid;
     }
 
-    public String getUsername() {
-        return username;
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
 
-    public void setUsername(String userName) {
-        this.username = userName;
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     public String getPassword() {
@@ -39,11 +84,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Set<Role> getRoles() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRoles(Set<Role> role) {
         this.role = role;
     }
 }

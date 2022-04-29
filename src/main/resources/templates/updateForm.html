@@ -14,22 +14,42 @@
             <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
                 <div class="card-body p-5 p-sm-5">
                     <h3 class="card-title text-center mb-5 fw-light fs-4">Update</h3>
-                    <form th:action="@{/saveUpdatedUser}" method="post" th:object="${user}">
+                    <form th:action="@{/users/saveUpdatedUser}" method="post" th:object="${user}">
+                        <div class="form-floating mb-3 invisible">
+                            <input th:field="*{userid}" class="form-control" id="userid" placeholder="userid"
+                                   required autofocus="autofocus">
+                            <label for="userid">UserId</label>
+                        </div>
                         <div class="form-floating mb-3">
-                            <input th:field="*{username}" class="form-control" id="username" placeholder="Username"
-                                   required autofocus="autofocus" readonly>
-                            <label for="username">Username</label>
+                            <input th:field="*{emailId}" class="form-control" id="emailId" placeholder="emailId"
+                                   required autofocus="autofocus">
+                            <label for="emailId">EmailId</label>
                         </div>
                         <hr>
                         <div class="form-floating mb-3">
-                            <input th:field="*{password}" type="password" class="form-control" id="password"
-                                   placeholder="Password" required>
+                            <input th:field="*{firstName}" class="form-control" id="firstName"
+                                   placeholder="firstName" required>
+                            <label for="firstName">First Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input th:field="*{lastName}" type="text" class="form-control" id="lastName" placeholder="lastName"
+                                   required>
+                            <label for="lastName">Last Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input th:field="*{enabled}" type="text" class="form-control" id="enabled" placeholder="enabled"
+                                   required>
+                            <label for="enabled">Enabled</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="password"
+                                   required>
                             <label for="password">Password</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input th:field="*{role}" type="text" class="form-control" id="role" placeholder="Supported: ROLE_USER, ROLE_ADMIN"
+                            <input th:field="*{roles}" type="text" class="form-control" id="role" placeholder="role"
                                    required>
-                            <label for="role">Role</label>
+                            <label for="role">Role (supported: ADMIN, USER separated by comma)</label>
                         </div>
                         <div class="d-grid mb-2">
                             <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" th:type="submit">

@@ -1,8 +1,8 @@
 package com.example.thymeleaf.service;
 
 import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.roles.Role;
 import com.example.thymeleaf.repository.UserRepository;
-import com.example.thymeleaf.controller.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,9 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,18 +22,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository repository;
 
+    @Autowired
+    ConfirmationTokenService confirmationTokenService;
+
     @Override
     public List<User> getAllUsers() {
         return repository.findAll();
-    }
-
-    @Override
-    public void saveUserRegistrationDto(UserRegistrationDto userRegistrationDto) {
-        User user = new User();
-        user.setUsername(userRegistrationDto.getUsername());
-        user.setPassword(userRegistrationDto.getPassword());
-        user.setRole("ROLE_USER");
-        repository.save(user);
     }
 
     @Override
@@ -40,37 +36,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        User user = repository.findUserByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User: " + username + " not found.");
-        }
-        return user;
+    public User findUserByEmailIdIgnoreCase(String emailId) {
+        return repository.findUserByEmailIdIgnoreCase(emailId);
     }
 
     @Override
-    public void deleteUserByUsername(String username) {
-        User user = repository.findUserByUsername(username);
+    @Transactional
+    public void deleteUserByEmailId(String emailId) {
+        User user = repository.findUserByEmailIdIgnoreCase(emailId);
         if (user != null) {
+            confirmationTokenService.removeConfirmationTokenByUserId(user.getUserid());
             repository.delete(user);
         }
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findUserByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.findUserByEmailIdIgnoreCase(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
+        if (!user.isEnabled()) {
+            throw new UsernameNotFoundException("User is not active!");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmailId(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(String role) {
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        String[] split = role.split(",");
-        for (String s : split) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(s));
-        }
+        roles.forEach(r -> grantedAuthorities.add(new SimpleGrantedAuthority(r.getCode())));
+
         return grantedAuthorities;
     }
+
 }

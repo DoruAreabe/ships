@@ -13,21 +13,30 @@
         <table class="table table-responsive table-bordered table-striped">
             <thead>
             <tr>
-                <th>User name</th>
-                <th>Password</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>user_id</th>
+                <th>email_id</th>
+                <th>first_name</th>
+                <th>last_name</th>
+                <th>password</th>
+                <th>is_enabled</th>
+                <th>role</th>
+                <th>action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.username}"></td>
+            <tr th:each="user : ${userDtos}">
+                <td th:text="${user.userid}"></td>
+                <td th:text="${user.emailId}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
                 <td th:text="${user.password}"></td>
-                <td th:text="${user.role}"></td>
+                <td th:text="${user.enabled}"></td>
+                <td th:text="${user.roles}"></td>
                 <td>
-                    <a th:unless="${#authentication.name} == ${user.username}"
-                       th:href="@{/users/{username}(username=${user.username})}" class="btn btn-danger">Delete</a>
-                    <a th:href="@{/showFormForUpdate/{username}(username=${user.username})}" class="btn btn-primary">Update</a>
+                    <a th:unless="${#authentication.name} == ${user.emailId}"
+                       th:href="@{/users/{emailid}(emailid=${user.emailId})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/users/showFormForUpdate/{emailid}(emailid=${user.emailId})}"
+                       class="btn btn-primary">Update</a>
                 </td>
             </tr>
             </tbody>

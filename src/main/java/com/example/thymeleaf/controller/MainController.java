@@ -20,6 +20,7 @@ public class MainController {
     public String user() {
         return "user";
     }
+
     @GetMapping("/admin")
     public String admin() {
         return "admin";
