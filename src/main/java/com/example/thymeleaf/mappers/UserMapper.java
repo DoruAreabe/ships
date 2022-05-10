@@ -6,7 +6,7 @@ import com.example.thymeleaf.model.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserMapper {
+public final class UserMapper {
     private UserMapper() {
     }
 

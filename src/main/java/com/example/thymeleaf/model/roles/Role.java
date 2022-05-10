@@ -4,7 +4,7 @@ public enum Role {
     ADMIN("ROLE_ADMIN"),
     USER("ROLE_USER");
 
-    private String code;
+    private final String code;
 
     Role(String code) {
         this.code = code;

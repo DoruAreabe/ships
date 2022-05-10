@@ -1,10 +1,10 @@
 package com.example.thymeleaf.controller;
 
-import com.example.thymeleaf.mappers.UserMapper;
-import com.example.thymeleaf.model.dto.UserDto;
 import com.example.thymeleaf.mailconfiguration.MailMessageConfiguration;
+import com.example.thymeleaf.mappers.UserMapper;
 import com.example.thymeleaf.model.ConfirmationToken;
 import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.dto.UserDto;
 import com.example.thymeleaf.model.roles.Role;
 import com.example.thymeleaf.service.ConfirmationTokenServiceImpl;
 import com.example.thymeleaf.service.EmailSenderService;
@@ -13,15 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Controller
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    public static final String SUCCESS = "success";
-    public static final String ERROR = "error";
+    private static final String SUCCESS = "success";
+    private static final String ERROR = "error";
 
     private final UserService userService;
     private final ConfirmationTokenServiceImpl confirmationTokenService;
