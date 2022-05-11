@@ -37,13 +37,6 @@
                                    placeholder="password">
                             <label for="password">Password</label>
                         </div>
-
-                        <!--                        <div class="form-check mb-3">-->
-                        <!--                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">-->
-                        <!--                            <label class="form-check-label" for="rememberPasswordCheck">-->
-                        <!--                                Remember password-->
-                        <!--                            </label>-->
-                        <!--                        </div>-->
                         <div class="d-grid">
                             <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign
                                 in
@@ -56,6 +49,13 @@
                             </button>
                         </div>
                     </form>
+                    <div class="d-grid mb-2">
+                        <button class="btn btn-lg btn-google btn-login fw-bold text-uppercase">
+                            <a style="color: white; text-decoration: none" th:href="@{/oauth2/authorization/google}">
+                                Log in with Google
+                            </a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

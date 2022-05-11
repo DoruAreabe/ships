@@ -1,0 +1,12 @@
+#credential for registration by google
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 706645215896-oij0uj7ifmkecqpb82r5uvnhj08titnd.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile

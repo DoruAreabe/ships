@@ -1,5 +1,6 @@
 package com.example.thymeleaf.model.dto;
 
+import com.example.thymeleaf.model.providers.Provider;
 import com.example.thymeleaf.model.roles.Role;
 
 import java.util.HashSet;
@@ -14,6 +15,8 @@ public class UserDto {
     private String lastName;
     private Set<Role> roles = new HashSet<>();
     private boolean enabled;
+    private Provider provider;
+
 
     public UserDto() {
     }
@@ -72,5 +75,13 @@ public class UserDto {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 }

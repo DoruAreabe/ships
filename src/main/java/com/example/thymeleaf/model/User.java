@@ -1,5 +1,6 @@
 package com.example.thymeleaf.model;
 
+import com.example.thymeleaf.model.providers.Provider;
 import com.example.thymeleaf.model.roles.Role;
 
 import javax.persistence.*;
@@ -33,7 +34,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> role = new HashSet<>();
 
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
+
     public User() {
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
     public long getUserid() {
