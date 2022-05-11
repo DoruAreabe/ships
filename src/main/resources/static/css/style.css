@@ -16,3 +16,10 @@ body {
 .btn-register:hover {
     background-color: #146c43;
 }
+.btn-google {
+    color: white !important;
+    background-color: #ea4335;
+}
+.btn-google:hover {
+     background-color: #c92418;
+ }

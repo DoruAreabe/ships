@@ -20,6 +20,7 @@
                 <th>password</th>
                 <th>is_enabled</th>
                 <th>role</th>
+                <th>provider</th>
                 <th>action</th>
             </tr>
             </thead>
@@ -32,6 +33,7 @@
                 <td th:text="${user.password}"></td>
                 <td th:text="${user.enabled}"></td>
                 <td th:text="${user.roles}"></td>
+                <td th:text="${user.provider}"></td>
                 <td>
                     <a th:unless="${#authentication.name} == ${user.emailId}"
                        th:href="@{/users/{emailid}(emailid=${user.emailId})}" class="btn btn-danger">Delete</a>

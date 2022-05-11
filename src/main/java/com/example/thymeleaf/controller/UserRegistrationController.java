@@ -5,6 +5,7 @@ import com.example.thymeleaf.mappers.UserMapper;
 import com.example.thymeleaf.model.ConfirmationToken;
 import com.example.thymeleaf.model.User;
 import com.example.thymeleaf.model.dto.UserDto;
+import com.example.thymeleaf.model.providers.Provider;
 import com.example.thymeleaf.model.roles.Role;
 import com.example.thymeleaf.service.ConfirmationTokenServiceImpl;
 import com.example.thymeleaf.service.EmailSenderService;
@@ -48,6 +49,7 @@ public class UserRegistrationController {
             redirectAttributes.addFlashAttribute(ERROR, "You have already account.");
         } else {
             userDto.getRoles().add(Role.USER);
+            userDto.setProvider(Provider.LOCAL);
             userService.saveUser(UserMapper.toEntity(userDto));
             existingUser = userService.findUserByEmailIdIgnoreCase(userDtoEmailId);
             ConfirmationToken token = new ConfirmationToken(existingUser);
@@ -74,6 +76,4 @@ public class UserRegistrationController {
         }
         return "redirect:/login";
     }
-
-
 }

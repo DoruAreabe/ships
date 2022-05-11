@@ -21,7 +21,7 @@ public final class UserMapper {
         dto.setLastName(user.getLastName());
         dto.setRoles(user.getRoles());
         dto.setEnabled(user.isEnabled());
-
+        dto.setProvider(user.getProvider());
         return dto;
     }
 
@@ -36,7 +36,7 @@ public final class UserMapper {
         user.setLastName(dto.getLastName());
         user.setRoles(dto.getRoles());
         user.setEnabled(dto.isEnabled());
-
+        user.setProvider(dto.getProvider());
         return user;
     }
 

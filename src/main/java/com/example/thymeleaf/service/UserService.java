@@ -14,4 +14,6 @@ public interface UserService extends UserDetailsService {
 
     User findUserByEmailIdIgnoreCase(String emailId);
 
+    void processOAuthPostLogin(CustomOAuth2User oAuth2User);
+
 }

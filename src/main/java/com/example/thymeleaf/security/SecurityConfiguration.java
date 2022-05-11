@@ -1,5 +1,7 @@
 package com.example.thymeleaf.security;
 
+import com.example.thymeleaf.service.CustomOAuth2User;
+import com.example.thymeleaf.service.CustomOAuth2UserService;
 import com.example.thymeleaf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +18,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private CustomOAuth2UserService oauthUserService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin", "/users/**").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/js/**", "/css/**","/registration/**").permitAll()
+                .antMatchers("/js/**", "/css/**", "/registration/**", "/oauth/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout()
@@ -50,6 +55,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
+
+        http.oauth2Login()
+                .loginPage("/login").userInfoEndpoint().userService(oauthUserService)
+                .and().successHandler((request, response, authentication) -> {
+                    CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+                    userService.processOAuthPostLogin(oAuth2User);
+                    response.sendRedirect("/");
+                }).permitAll()
+                .and().exceptionHandling();
 
     }
 }
