@@ -1,6 +1,6 @@
 package com.example.thymeleaf.service;
 
-import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.entity.User;
 import com.example.thymeleaf.model.providers.Provider;
 import com.example.thymeleaf.model.roles.Role;
 import com.example.thymeleaf.repository.UserRepository;

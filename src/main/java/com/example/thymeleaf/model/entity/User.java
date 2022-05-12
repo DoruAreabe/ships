@@ -1,4 +1,4 @@
-package com.example.thymeleaf.model;
+package com.example.thymeleaf.model.entity;
 
 import com.example.thymeleaf.model.providers.Provider;
 import com.example.thymeleaf.model.roles.Role;

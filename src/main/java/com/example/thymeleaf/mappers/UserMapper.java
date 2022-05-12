@@ -1,7 +1,7 @@
 package com.example.thymeleaf.mappers;
 
 import com.example.thymeleaf.model.dto.UserDto;
-import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.entity.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

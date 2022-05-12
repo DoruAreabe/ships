@@ -1,6 +1,6 @@
 package com.example.thymeleaf.service;
 
-import com.example.thymeleaf.model.ConfirmationToken;
+import com.example.thymeleaf.model.entity.ConfirmationToken;
 
 public interface ConfirmationTokenService {
     void removeConfirmationTokenByUserId(long userId);

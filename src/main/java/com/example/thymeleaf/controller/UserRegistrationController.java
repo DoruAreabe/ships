@@ -2,8 +2,8 @@ package com.example.thymeleaf.controller;
 
 import com.example.thymeleaf.mailconfiguration.MailMessageConfiguration;
 import com.example.thymeleaf.mappers.UserMapper;
-import com.example.thymeleaf.model.ConfirmationToken;
-import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.entity.ConfirmationToken;
+import com.example.thymeleaf.model.entity.User;
 import com.example.thymeleaf.model.dto.UserDto;
 import com.example.thymeleaf.model.providers.Provider;
 import com.example.thymeleaf.model.roles.Role;

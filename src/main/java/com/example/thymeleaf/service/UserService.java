@@ -1,6 +1,6 @@
 package com.example.thymeleaf.service;
 
-import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
