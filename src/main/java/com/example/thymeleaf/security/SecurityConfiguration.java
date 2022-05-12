@@ -23,6 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomOAuth2UserService oauthUserService;
 
+    @Autowired
+    private CustomBasicAuthenticationEntryPoint authenticationEntryPoint;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
@@ -48,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/js/**", "/css/**", "/registration/**", "/oauth/**").permitAll()
                 .anyRequest().authenticated()
+                .and().httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout()
                 .invalidateHttpSession(true)
@@ -55,6 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
+
+
 
         http.oauth2Login()
                 .loginPage("/login").userInfoEndpoint().userService(oauthUserService)
@@ -64,6 +70,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     response.sendRedirect("/");
                 }).permitAll()
                 .and().exceptionHandling();
-
     }
 }
