@@ -1,0 +1,6 @@
+lista druzyn
+https://api-football-v1.p.rapidapi.com/v3/teams?league=39&season=2021
+
+
+wynik meczu pomiedzy dwiema druzynami
+https://api-football-v1.p.rapidapi.com/v3/fixtures/headtohead?h2h=33-34&season=2021&last=1
