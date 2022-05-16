@@ -9,7 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeaguePaging {
-    private float current;
-    private float total;
+public class League {
+    private long id;
+    private String name;
+    private String type;
+    private String logo;
 }

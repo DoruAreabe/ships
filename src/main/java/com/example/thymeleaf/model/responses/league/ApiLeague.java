@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeagueResponse {
-    private long id;
-    private String name;
-    private String type;
-    private String logo;
+public class ApiLeague {
+    private League league;
+    private Country country;
+    private List<Season> seasons;
 }
