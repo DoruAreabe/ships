@@ -1,6 +1,6 @@
 package com.example.thymeleaf.service;
 
-import com.example.thymeleaf.model.League;
+import com.example.thymeleaf.model.entity.League;
 
 import java.util.List;
 

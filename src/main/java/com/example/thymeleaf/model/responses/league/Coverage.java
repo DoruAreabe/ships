@@ -1,4 +1,4 @@
-package com.example.thymeleaf.controller.footballapi.response;
+package com.example.thymeleaf.model.responses.league;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.thymeleaf.controller.footballapi.response;
+package com.example.thymeleaf.model.responses.league;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiLeague {
-    private League league;
+    private LeagueDetails league;
     private Country country;
     private List<Season> seasons;
 }

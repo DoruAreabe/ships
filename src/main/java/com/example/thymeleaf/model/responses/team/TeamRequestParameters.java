@@ -1,4 +1,4 @@
-package com.example.thymeleaf.model.responses;
+package com.example.thymeleaf.model.responses.team;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.example.thymeleaf.mappers;
 
-import com.example.thymeleaf.model.League;
+import com.example.thymeleaf.model.entity.League;
 import com.example.thymeleaf.model.dto.LeagueDto;
 
 public final class LeagueMapper {

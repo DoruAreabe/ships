@@ -1,4 +1,4 @@
-package com.example.thymeleaf.controller.footballapi.response;
+package com.example.thymeleaf.model.responses.league;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class League {
+public class LeagueDetails {
     private long id;
     private String name;
     private String type;
