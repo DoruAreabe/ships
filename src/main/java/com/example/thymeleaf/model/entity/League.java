@@ -1,4 +1,4 @@
-package com.example.thymeleaf.model;
+package com.example.thymeleaf.model.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
