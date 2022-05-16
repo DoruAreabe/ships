@@ -1,15 +1,16 @@
-package com.example.thymeleaf.controller.footballapi.response;
+package com.example.thymeleaf.model.responses;
 
+import com.example.thymeleaf.model.entity.Team;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeaguePaging {
-    private float current;
-    private float total;
+public class ApiTeam {
+    Team team;
+    Venue venue;
 }

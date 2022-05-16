@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiLeague {
-    private LeagueResponse league;
+    private League league;
     private Country country;
     private List<Season> seasons;
 }

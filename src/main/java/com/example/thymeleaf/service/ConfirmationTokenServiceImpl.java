@@ -1,6 +1,6 @@
 package com.example.thymeleaf.service;
 
-import com.example.thymeleaf.model.ConfirmationToken;
+import com.example.thymeleaf.model.entity.ConfirmationToken;
 import com.example.thymeleaf.repository.ConfirmationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

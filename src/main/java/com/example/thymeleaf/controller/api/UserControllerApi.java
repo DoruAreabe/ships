@@ -1,7 +1,7 @@
 package com.example.thymeleaf.controller.api;
 
 import com.example.thymeleaf.mappers.UserMapper;
-import com.example.thymeleaf.model.User;
+import com.example.thymeleaf.model.entity.User;
 import com.example.thymeleaf.model.dto.UserDto;
 import com.example.thymeleaf.service.UserService;
 import org.springframework.http.HttpStatus;

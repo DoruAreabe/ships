@@ -1,5 +1,6 @@
 package com.example.thymeleaf.controller.footballapi.response;
 
+import com.example.thymeleaf.model.responses.Paging;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,13 +13,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Response {
+public class LeaguesResponse {
 
     private String get;
     private List<Object> parameters = new ArrayList<>();
     private List<Integer> errors = new ArrayList<>();
     private Integer results;
-    private LeaguePaging leaguePaging;
+    private Paging paging;
     private List<ApiLeague> response = new ArrayList<>();
 
 }
