@@ -1,4 +1,4 @@
-package com.example.thymeleaf.model.responses.team;
+package com.example.thymeleaf.model.responses.fixtures;
 
 import com.example.thymeleaf.model.responses.Paging;
 import lombok.AllArgsConstructor;
@@ -13,11 +13,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamResponse {
+public class FixtureResponse {
     private String get;
-    TeamRequestParameters parameters;
+    FixtureParameters ParametersObject;
     List<Integer> errors = new ArrayList<>();
     private float results;
     Paging paging;
-    List<ApiTeam> response = new ArrayList<>();
+    List<FixtureResponseEntity> response = new ArrayList<>();
 }

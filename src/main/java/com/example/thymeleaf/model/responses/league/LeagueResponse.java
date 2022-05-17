@@ -1,6 +1,6 @@
 package com.example.thymeleaf.model.responses.league;
 
-import com.example.thymeleaf.model.responses.team.Paging;
+import com.example.thymeleaf.model.responses.Paging;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeaguesResponse {
+public class LeagueResponse {
 
     private String get;
     private List<Object> parameters = new ArrayList<>();

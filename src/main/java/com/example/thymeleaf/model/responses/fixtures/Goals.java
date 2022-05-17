@@ -1,4 +1,4 @@
-package com.example.thymeleaf.model.responses.team;
+package com.example.thymeleaf.model.responses.fixtures;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Paging {
-    private double current;
-    private double total;
+public class Goals {
+    Integer home;
+    Integer away;
 }
