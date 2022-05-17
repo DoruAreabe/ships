@@ -8,7 +8,11 @@ import java.util.List;
 
 @Service
 public class TeamServiceImpl implements TeamService {
-    TeamsRepository teamsRepository;
+    private final TeamsRepository teamsRepository;
+
+    public TeamServiceImpl(TeamsRepository teamsRepository) {
+        this.teamsRepository = teamsRepository;
+    }
 
     @Override
     public List<Team> saveAll(List<Team> teams) {
