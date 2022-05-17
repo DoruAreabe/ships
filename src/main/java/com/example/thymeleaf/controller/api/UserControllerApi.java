@@ -8,11 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/users")
 public class UserControllerApi {
 
     private final UserService userService;
@@ -21,7 +23,7 @@ public class UserControllerApi {
         this.userService = userService;
     }
 
-    @GetMapping("/api/users/{email}")
+    @GetMapping("/{email}")
     public ResponseEntity<UserDto> getUser(@PathVariable String email) {
         User user = userService.findUserByEmailIdIgnoreCase(email);
         if (user != null) {
@@ -31,7 +33,7 @@ public class UserControllerApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/api/users")
+    @GetMapping()
     public ResponseEntity<List<UserDto>> getUsers() {
         List<UserDto> userDtos = UserMapper.mapAllUser(userService.getAllUsers());
         if (userDtos.isEmpty()) {
