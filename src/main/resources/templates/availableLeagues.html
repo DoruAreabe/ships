@@ -17,16 +17,20 @@
                 <th>code</th>
                 <th>country</th>
                 <th>is_active</th>
+                <th>action</th>
             </tr>
             </thead>
             <tbody>
-                <tr th:each="league : ${leaguesDtos}">
-                    <td th:text="${league.id}"></td>
-                    <td th:text="${league.name}"></td>
-                    <td th:text="${league.code}"></td>
-                    <td th:text="${league.country}"></td>
-                    <td th:text="${league.isActive}"></td>
-                </tr>
+            <tr th:each="league : ${leaguesDtos}">
+                <td th:text="${league.id}"></td>
+                <td th:text="${league.name}"></td>
+                <td th:text="${league.code}"></td>
+                <td th:text="${league.country}"></td>
+                <td th:text="${league.isActive}"></td>
+                <td>
+                    <a th:href="@{/api/admin/availableLeagues/{id}(id=${league.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

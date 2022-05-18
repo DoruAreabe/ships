@@ -1,18 +1,18 @@
 package com.example.thymeleaf.service;
 
 import com.example.thymeleaf.model.entity.Fixture;
+import com.example.thymeleaf.model.entity.League;
+import com.example.thymeleaf.model.entity.Team;
 import com.example.thymeleaf.model.responses.fixtures.FixtureResponse;
 import com.example.thymeleaf.model.responses.league.ApiLeague;
 import com.example.thymeleaf.model.responses.league.Country;
 import com.example.thymeleaf.model.responses.league.LeagueDetails;
 import com.example.thymeleaf.model.responses.league.LeagueResponse;
-import com.example.thymeleaf.model.entity.League;
-import com.example.thymeleaf.model.entity.Team;
+import com.example.thymeleaf.model.responses.team.ApiTeam;
 import com.example.thymeleaf.model.responses.team.TeamResponse;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +43,9 @@ public class FootballApiService {
         restTemplate = new RestTemplate();
         ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league.getId(), season), HttpMethod.GET, httpEntity, TeamResponse.class);
         return response.getBody().getResponse().stream()
-                .map(x -> x.getTeam()).peek(x->x.setLeague(league)).collect(Collectors.toList());
+                .map(ApiTeam::getTeam)
+                .peek(x -> x.setLeague(league))
+                .collect(Collectors.toList());
     }
 
     public List<Fixture> getFixturesBetween(Integer league, Integer season, String from, String to) {

@@ -14,4 +14,5 @@ import java.util.List;
 @AllArgsConstructor
 public class Options {
     private List<String> selected = new ArrayList<>();
+    private List<String> activeLeagues = new ArrayList<>();
 }

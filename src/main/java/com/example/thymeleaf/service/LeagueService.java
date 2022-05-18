@@ -11,7 +11,9 @@ public interface LeagueService {
 
     void saveAllLeagues(List<League> leagues);
 
-    void saveLeague(League leagueById);
+    void saveLeague(League league);
 
     List<League> getAllActiveLeagues();
+
+    League getLeagueById(Integer id);
 }
