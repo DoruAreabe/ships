@@ -6,6 +6,7 @@
 
     <link th:rel="stylesheet" th:href="@{/css/bootstrap-duallistbox.min.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:href="@{/css/all.min.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -13,14 +14,18 @@
     <div class="row">
         <div class="col-md-8 mt-5">
             <form method="post" th:object="${options}" th:action="@{/api/admin/save-chosen-league}">
-
                 <select multiple size="15" id="optionsbox" name="selected"
-                        class="form-control">
+                        class="form-control" th:field="${options.activeLeagues}">
                     <option th:each="league : ${options.selected}" th:value="${league}"
                             th:text="${league}"></option>
                 </select>
                 <button class="btn btn-primary mt-3" th:type="submit">Submit</button>
             </form>
+                <button class="btn btn-info mt-3 ">
+                    <a style="color: white; text-decoration: none" th:href="@{/api/admin/getData/leagues}">
+                        Download all leagues
+                    </a>
+                </button>
         </div>
     </div>
 </div>

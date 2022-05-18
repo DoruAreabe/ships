@@ -30,10 +30,8 @@ public final class LeagueMapper {
         return dto;
     }
 
-    public static List<LeagueDto> mapAllLeagues(List<League> leagues) {
+    public static List<LeagueDto> mapAllEntity(List<League> leagues) {
         return leagues.stream().map(LeagueMapper::toLeagueDto)
                 .collect(Collectors.toList());
     }
-
-
 }
