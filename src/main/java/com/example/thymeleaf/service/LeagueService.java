@@ -5,7 +5,7 @@ import com.example.thymeleaf.model.entity.League;
 import java.util.List;
 
 public interface LeagueService {
-    League findLeagueById(Long id);
+    League findLeagueById(Integer id);
 
     List<League> getAllLeagues();
 

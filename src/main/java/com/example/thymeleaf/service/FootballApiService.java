@@ -1,9 +1,11 @@
 package com.example.thymeleaf.service;
 
+import com.example.thymeleaf.model.entity.Fixture;
+import com.example.thymeleaf.model.responses.fixtures.FixtureResponse;
 import com.example.thymeleaf.model.responses.league.ApiLeague;
 import com.example.thymeleaf.model.responses.league.Country;
 import com.example.thymeleaf.model.responses.league.LeagueDetails;
-import com.example.thymeleaf.model.responses.league.LeaguesResponse;
+import com.example.thymeleaf.model.responses.league.LeagueResponse;
 import com.example.thymeleaf.model.entity.League;
 import com.example.thymeleaf.model.entity.Team;
 import com.example.thymeleaf.model.responses.team.TeamResponse;
@@ -25,6 +27,8 @@ public class FootballApiService {
     RestTemplate restTemplate;
     private static final String API_FOOTBALL_TEAM_URI = "https://api-football-v1.p.rapidapi.com/v3/teams?league=idOfTheLeague&season=SeasonYear";
     private static final String API_FOOTBALL_LEAGUES_URI = "https://api-football-v1.p.rapidapi.com/v3/leagues";
+    private static final String API_FOOTBALL_FIXTURES_BETWEEN_URI = "https://api-football-v1.p.rapidapi.com/v3/fixtures?league=leagueId&season=seasonYear&from=fromDate&to=toDate&timezone=Europe/Warsaw";
+    private static final String API_FOOTBALL_FIXTURES_BY_ID_URI = "https://api-football-v1.p.rapidapi.com/v3/fixtures?id=fixtureId&timezone=Europe/Warsaw";
 
 
     public FootballApiService() {
@@ -35,22 +39,47 @@ public class FootballApiService {
         this.httpEntity = new HttpEntity<>("", headers);
     }
 
-    public List<Team> getTeamsByLeagueAndSeason(Integer league, Integer season) {
-        restTemplate=new RestTemplate();
-        ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league, season), HttpMethod.GET, httpEntity, TeamResponse.class);
+    public List<Team> getTeamsByLeagueAndSeason(League league, Integer season) {
+        restTemplate = new RestTemplate();
+        ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league.getId(), season), HttpMethod.GET, httpEntity, TeamResponse.class);
         return response.getBody().getResponse().stream()
-                .map(x -> x.getTeam()).collect(Collectors.toList());
+                .map(x -> x.getTeam()).peek(x->x.setLeague(league)).collect(Collectors.toList());
+    }
 
+    public List<Fixture> getFixturesBetween(Integer league, Integer season, String from, String to) {
+        restTemplate = new RestTemplate();
+        ResponseEntity<FixtureResponse> response = restTemplate.exchange(getFixturesBetweenUri(league, season, from, to), HttpMethod.GET, httpEntity, FixtureResponse.class);
+        return response.getBody().getResponse().stream()
+                .map(Fixture::new).collect(Collectors.toList());
+    }
+
+    public Fixture getFixtureById(Integer fixtureId) {
+        restTemplate = new RestTemplate();
+        ResponseEntity<FixtureResponse> response = restTemplate.exchange(getFixturesByIdUri(fixtureId), HttpMethod.GET, httpEntity, FixtureResponse.class);
+        return response.getBody().getResponse().stream()
+                .map(Fixture::new).collect(Collectors.toList()).get(0);
     }
 
     String getTeamUri(Integer league, Integer season) {
-        return API_FOOTBALL_TEAM_URI.replace("idOfTheLeague", String.valueOf(league)).replace("SeasonYear", String.valueOf(season));
+        return API_FOOTBALL_TEAM_URI.replace("idOfTheLeague", String.valueOf(league))
+                .replace("SeasonYear", String.valueOf(season));
+    }
+
+    String getFixturesBetweenUri(Integer league, Integer season, String from, String to) {
+        return API_FOOTBALL_FIXTURES_BETWEEN_URI.replace("leagueId", String.valueOf(league))
+                .replace("seasonYear", String.valueOf(season))
+                .replace("fromDate", from)
+                .replace("toDate", to);
+    }
+
+    String getFixturesByIdUri(Integer fixtureId) {
+        return API_FOOTBALL_FIXTURES_BY_ID_URI.replace("fixtureId", String.valueOf(fixtureId));
     }
 
 
     public List<League> getAllLeagues() {
-        restTemplate=new RestTemplate();
-        ResponseEntity<LeaguesResponse> response = restTemplate.exchange(API_FOOTBALL_LEAGUES_URI, HttpMethod.GET, httpEntity, LeaguesResponse.class);
+        restTemplate = new RestTemplate();
+        ResponseEntity<LeagueResponse> response = restTemplate.exchange(API_FOOTBALL_LEAGUES_URI, HttpMethod.GET, httpEntity, LeagueResponse.class);
 
         List<LeagueDetails> collectLeagues = response.getBody().getResponse().stream()
                 .map(ApiLeague::getLeague)
@@ -67,7 +96,7 @@ public class FootballApiService {
         for (int i = 0; i < collectLeagues.size(); i++) {
             League leagueEntity = new League();
 
-            long id = collectLeagues.get(i).getId();
+            int id = collectLeagues.get(i).getId();
             String name = collectLeagues.get(i).getName();
 
             String countryName = countries.get(i).getName();

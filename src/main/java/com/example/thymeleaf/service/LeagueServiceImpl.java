@@ -16,7 +16,7 @@ public class LeagueServiceImpl implements LeagueService{
     }
 
     @Override
-    public League findLeagueById(Long id) {
+    public League findLeagueById(Integer id) {
         League league = repository.findLeagueById(id);
         if (league == null){
             throw new EntityNotFoundException("League with id: " + id + " not found");

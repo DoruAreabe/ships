@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LeagueDetails {
-    private long id;
+    private Integer id;
     private String name;
     private String type;
     private String logo;

@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -22,4 +19,7 @@ public class Team {
     private String name;
     private String code;
     private String country;
+    @ManyToOne
+    @JoinColumn(name = "league_id")
+    private League league;
 }
