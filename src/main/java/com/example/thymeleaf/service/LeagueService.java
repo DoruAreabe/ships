@@ -10,4 +10,8 @@ public interface LeagueService {
     List<League> getAllLeagues();
 
     void saveAllLeagues(List<League> leagues);
+
+    void saveLeague(League leagueById);
+
+    List<League> getAllActiveLeagues();
 }

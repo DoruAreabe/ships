@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Available leagues</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h2>Downloaded leagues</h2>
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>code</th>
+                <th>country</th>
+                <th>is_active</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="league : ${leaguesDtos}">
+                    <td th:text="${league.id}"></td>
+                    <td th:text="${league.name}"></td>
+                    <td th:text="${league.code}"></td>
+                    <td th:text="${league.country}"></td>
+                    <td th:text="${league.isActive}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

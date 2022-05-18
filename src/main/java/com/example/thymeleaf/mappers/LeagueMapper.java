@@ -3,9 +3,13 @@ package com.example.thymeleaf.mappers;
 import com.example.thymeleaf.model.entity.League;
 import com.example.thymeleaf.model.dto.LeagueDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public final class LeagueMapper {
     private LeagueMapper() {
     }
+
     public static League toEntity(LeagueDto dto) {
         League league = new League();
         league.setId(dto.getId());
@@ -15,6 +19,7 @@ public final class LeagueMapper {
         league.setIsActive(dto.getIsActive());
         return league;
     }
+
     public static LeagueDto toLeagueDto(League league) {
         LeagueDto dto = new LeagueDto();
         dto.setId(league.getId());
@@ -25,6 +30,10 @@ public final class LeagueMapper {
         return dto;
     }
 
+    public static List<LeagueDto> mapAllLeagues(List<League> leagues) {
+        return leagues.stream().map(LeagueMapper::toLeagueDto)
+                .collect(Collectors.toList());
+    }
 
 
 }

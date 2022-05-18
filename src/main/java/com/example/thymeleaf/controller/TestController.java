@@ -9,10 +9,12 @@ import com.example.thymeleaf.service.LeagueService;
 import com.example.thymeleaf.service.TeamService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("getData")
 public class TestController {
 
     private final FootballApiService footballApiService;

@@ -43,4 +43,14 @@ public class LeagueServiceImpl implements LeagueService{
         }
         repository.saveAll(leagues);
     }
+
+    @Override
+    public void saveLeague(League leagueById) {
+        repository.save(leagueById);
+    }
+
+    @Override
+    public List<League> getAllActiveLeagues() {
+        return repository.findLeaguesByIsActive(true);
+    }
 }
