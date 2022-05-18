@@ -28,8 +28,8 @@ public class TestController {
 
     @GetMapping("/teams")
     public String getTeams() {
-        List<Team> teams = footballApiService.getTeamsByLeagueAndSeason(39, 2021);
-        teamsService.saveAll(teams);
+//        List<Team> teams = footballApiService.getTeamsByLeagueAndSeason(39, 2021);
+//        teamsService.saveAll(teams);
         return "index";
     }
 

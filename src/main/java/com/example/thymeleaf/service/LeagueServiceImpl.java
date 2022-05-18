@@ -8,7 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
-public class LeagueServiceImpl implements LeagueService{
+public class LeagueServiceImpl implements LeagueService {
     private final LeagueRepository repository;
 
     public LeagueServiceImpl(LeagueRepository repository) {
@@ -18,7 +18,7 @@ public class LeagueServiceImpl implements LeagueService{
     @Override
     public League findLeagueById(Long id) {
         League league = repository.findLeagueById(id);
-        if (league == null){
+        if (league == null) {
             throw new EntityNotFoundException("League with id: " + id + " not found");
         }
         return league;
@@ -45,12 +45,18 @@ public class LeagueServiceImpl implements LeagueService{
     }
 
     @Override
-    public void saveLeague(League leagueById) {
-        repository.save(leagueById);
+    public void saveLeague(League league) {
+        repository.save(league);
     }
 
     @Override
     public List<League> getAllActiveLeagues() {
         return repository.findLeaguesByIsActive(true);
     }
+
+    @Override
+    public League getLeagueById(Long id) {
+        return repository.findLeagueById(id);
+    }
+
 }

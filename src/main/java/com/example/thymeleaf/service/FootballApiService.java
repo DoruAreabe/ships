@@ -35,11 +35,13 @@ public class FootballApiService {
         this.httpEntity = new HttpEntity<>("", headers);
     }
 
-    public List<Team> getTeamsByLeagueAndSeason(Integer league, Integer season) {
+    public List<Team> getTeamsByLeagueAndSeason(League league, Integer season) {
         restTemplate=new RestTemplate();
-        ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league, season), HttpMethod.GET, httpEntity, TeamResponse.class);
+        ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league.getId().intValue(), season), HttpMethod.GET, httpEntity, TeamResponse.class);
         return response.getBody().getResponse().stream()
-                .map(x -> x.getTeam()).collect(Collectors.toList());
+                .map(x -> x.getTeam())
+                .peek(x-> x.setLeague(league))
+                .collect(Collectors.toList());
 
     }
 
