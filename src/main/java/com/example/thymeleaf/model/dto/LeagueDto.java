@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LeagueDto {
 
-    private Long id;
+    private Integer id;
     private String name;
     private String code;
     private String country;

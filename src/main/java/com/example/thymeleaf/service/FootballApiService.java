@@ -27,8 +27,8 @@ public class FootballApiService {
     RestTemplate restTemplate;
     private static final String API_FOOTBALL_TEAM_URI = "https://api-football-v1.p.rapidapi.com/v3/teams?league=idOfTheLeague&season=SeasonYear";
     private static final String API_FOOTBALL_LEAGUES_URI = "https://api-football-v1.p.rapidapi.com/v3/leagues";
-    private static final String API_FOOTBALL_FIXTURES_BETWEEN_URI = "https://api-football-v1.p.rapidapi.com/v3/fixtures?league=leagueId&season=seasonYear&from=fromDate&to=toDate";
-    private static final String API_FOOTBALL_FIXTURES_BY_ID_URI = "https://api-football-v1.p.rapidapi.com/v3/fixtures?id=fixtureId";
+    private static final String API_FOOTBALL_FIXTURES_BETWEEN_URI = "https://api-football-v1.p.rapidapi.com/v3/fixtures?league=leagueId&season=seasonYear&from=fromDate&to=toDate&timezone=Europe/Warsaw";
+    private static final String API_FOOTBALL_FIXTURES_BY_ID_URI = "https://api-football-v1.p.rapidapi.com/v3/fixtures?id=fixtureId&timezone=Europe/Warsaw";
 
 
     public FootballApiService() {
@@ -39,12 +39,11 @@ public class FootballApiService {
         this.httpEntity = new HttpEntity<>("", headers);
     }
 
-    public List<Team> getTeamsByLeagueAndSeason(Integer league, Integer season) {
+    public List<Team> getTeamsByLeagueAndSeason(League league, Integer season) {
         restTemplate = new RestTemplate();
-        ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league, season), HttpMethod.GET, httpEntity, TeamResponse.class);
+        ResponseEntity<TeamResponse> response = restTemplate.exchange(getTeamUri(league.getId(), season), HttpMethod.GET, httpEntity, TeamResponse.class);
         return response.getBody().getResponse().stream()
-                .map(x -> x.getTeam()).collect(Collectors.toList());
-
+                .map(x -> x.getTeam()).peek(x->x.setLeague(league)).collect(Collectors.toList());
     }
 
     public List<Fixture> getFixturesBetween(Integer league, Integer season, String from, String to) {
@@ -97,7 +96,7 @@ public class FootballApiService {
         for (int i = 0; i < collectLeagues.size(); i++) {
             League leagueEntity = new League();
 
-            long id = collectLeagues.get(i).getId();
+            int id = collectLeagues.get(i).getId();
             String name = collectLeagues.get(i).getName();
 
             String countryName = countries.get(i).getName();

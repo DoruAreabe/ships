@@ -30,7 +30,8 @@ public class TestController {
 
     @GetMapping("/teams")
     public String getTeams() {
-        List<Team> teams = footballApiService.getTeamsByLeagueAndSeason(39, 2021);
+        League league = leagueService.findLeagueById(39);
+        List<Team> teams = footballApiService.getTeamsByLeagueAndSeason(league, 2021);
         teamsService.saveAll(teams);
         return "index";
     }
@@ -44,7 +45,7 @@ public class TestController {
 
     @GetMapping("/fixturesBetween")
     public String getFixturesBetween() {
-        List<Fixture> fixtures = footballApiService.getFixturesBetween(39, 2021, "2022-05-16", "2022-05-16");
+        List<Fixture> fixtures = footballApiService.getFixturesBetween(39, 2021, "2022-05-17", "2022-05-19");
         fixtureService.saveAll(fixtures);
         return "index";
     }

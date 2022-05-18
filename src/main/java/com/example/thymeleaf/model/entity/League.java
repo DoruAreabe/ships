@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class League {
 
     @Id
-    private Long id;
+    private Integer id;
     private String name;
     private String country;
     private String code;
